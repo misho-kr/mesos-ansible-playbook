@@ -1,0 +1,49 @@
+# -----------------------------------------------------------------------
+#                             Mesos cluster
+# -----------------------------------------------------------------------
+
+[mesos:children]
+zookeepers
+mesos-masters
+mesos-slaves
+mesos-frameworks
+
+[zookeepers]
+
+[mesos-masters]
+
+# slaves ---------------------------------------------------------------
+
+[mesos-slaves:children]
+mesos-only-slaves
+marathon-slaves
+aurora-slaves
+
+[mesos-only-slaves]
+
+[marathon-slaves]
+
+[aurora-slaves]
+
+# frameworks -----------------------------------------------------------
+
+[mesos-frameworks:children]
+marathon-schedulers
+aurora-schedulers
+chronos-schedulers
+storm-schedulers
+spark-schedulers
+
+[marathon-schedulers]
+
+[aurora-schedulers]
+
+[chronos-schedulers]
+
+[storm-schedulers]
+
+[spark-schedulers]
+
+# -----------------------------------------------------------------------
+#                         End of Mesos Cluster
+# -----------------------------------------------------------------------

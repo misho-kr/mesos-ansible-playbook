@@ -1,0 +1,14 @@
+---
+# Build Mesos cluster and frameworks
+
+- hosts: mesos
+
+  pre_tasks:
+  - include: tasks/prerequisites.yml
+
+  roles:
+  - { role: zookeeper,          tags=source }
+  - { role: mesos,              tags=docker }
+
+  post_tasks:
+  - include: tasks/package.yml

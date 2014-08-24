@@ -1,0 +1,18 @@
+---
+# Global variables for Mesos cluster
+
+mesos_dir:              /mesos
+mesos_version:          0.17.0
+mesos_git_tag:          0.17.0-rc2
+protobuf_version:       2.5.0
+
+mesos_cluster: {
+
+    zookeeper:    'zk://cl04zk-229273.slc01.dev.ebayc3.com:2181,cl04zk-229274.slc01.dev.ebayc3.com:2181,cl04zk-229275.slc01.dev.ebayc3.com:2181/mesos',
+    logs:         /mesos/log,
+    runs:         /mesos/run,
+    disk_space:   16384
+}
+
+mesos_dep:      [ "git", "zip", "python-pip" ]
+mesos_pip_dep:  []
