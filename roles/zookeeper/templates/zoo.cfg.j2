@@ -12,11 +12,11 @@ syncLimit=5
 # the directory where the snapshot is stored.
 # do not use /tmp for storage, /tmp here is just 
 # example sakes.
-dataDir=/var/lib/zookeeper/data
-dataLogDir=/var/lib/zookeeper/log
+dataDir={{ zookeeper_data_dir }}
+dataLogDir={{ zookeeper_log_dir }}
 
 # the port at which the clients will connect
-clientPort=2181
+clientPort={{ zookeeper_client_port }}
 
 #
 # Be sure to read the maintenance section of the 
@@ -30,4 +30,6 @@ clientPort=2181
 # Set to "0" to disable auto purge feature
 #autopurge.purgeInterval=1
 
-server.1=mesos1.vmnet122.wonder.land:2888:3888
+{% for host in groups['zookeepers'] %}
+  server.{{ loop.index }}={{ host }}:{{ zookeeper_followers_port }}:{{ zookeeper_election_port }}
+{% endfor %}

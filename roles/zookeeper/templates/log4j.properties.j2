@@ -2,10 +2,10 @@
 zookeeper.root.logger=INFO, SYSTEMD
 zookeeper.console.threshold=INFO
 zookeeper.systemd.threshold=INFO
-zookeeper.log.dir=/var/log/zookeeper
+zookeeper.log.dir={{ zookeeper_log_dir }}
 zookeeper.log.file=zookeeper.log
 zookeeper.log.threshold=DEBUG
-zookeeper.tracelog.dir=/var/log/zookeeper
+zookeeper.tracelog.dir={{ zookeeper_log_dir }}
 zookeeper.tracelog.file=zookeeper_trace.log
 
 #

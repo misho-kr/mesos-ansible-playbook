@@ -7,8 +7,9 @@
   - zookeeper
   - zookeeper-server
 
-- name: Copy configuration files
-  copy: src={{ item }} dest=/etc/zookeeper/
+- name: Create configuration files
+  template: src={{ item }} dest=/etc/zookeeper/{{ item | replace(".j2", "") }}
+  			backup=yes
   with_items:
-  - zoo.cfg
-  - log4j.properties
+  - zoo.cfg.j2
+  - log4j.properties.j2

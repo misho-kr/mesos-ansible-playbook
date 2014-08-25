@@ -2,7 +2,7 @@
 # Global variables for Mesos cluster
 
 mesos_dir:              /mesos
-mesos_version:          0.17.0
+mesos_version:          0.20.0
 mesos_git_tag:          0.17.0-rc2
 protobuf_version:       2.5.0
 

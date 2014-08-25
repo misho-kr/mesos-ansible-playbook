@@ -7,5 +7,5 @@ zookeeper_log_dir:      "{{ zookeeper_dir }}/log"
 # the port at which the clients will connect
 zookeeper_client_port:          2181
 
-zookeeper_election_port:        2888
-zookeeper_followers_port:       3888
+zookeeper_followers_port:       2888
+zookeeper_election_port:        3888
