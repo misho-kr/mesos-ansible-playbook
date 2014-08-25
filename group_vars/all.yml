@@ -14,5 +14,5 @@ mesos_cluster: {
     disk_space:   16384
 }
 
-mesos_dep:      [ "git", "zip", "python-pip" ]
-mesos_pip_dep:  []
+mesos_deps:      [ "git", "zip", "python-pip" ]
+mesos_pip_deps:  []

@@ -6,10 +6,10 @@
 
 - name: Install pre-requisite software packages
   sudo: yes
-  apt: name={{ item }} state=present
-  with_items: {{ mesos_deps }}
+  yum: name={{ item }} state=present
+  with_items: mesos_deps
 
 - name: Install pre-requisite software packages (pip)
   sudo: yes
   pip: name={{ item }}
-  with_items: {{ mesos_pip_deps }}
+  with_items: mesos_pip_deps

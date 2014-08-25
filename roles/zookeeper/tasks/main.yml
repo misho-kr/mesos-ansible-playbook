@@ -1,0 +1,14 @@
+---
+# Install and configure Zookeper 
+
+- name: Install Zookeeper package
+  yum: state=present name={{ item }}
+  with_items:
+  - zookeeper
+  - zookeeper-server
+
+- name: Copy configuration files
+  copy: src={{ item }} dest=/etc/zookeeper/
+  with_items:
+  - zoo.cfg
+  - log4j.properties
