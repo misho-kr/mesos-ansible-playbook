@@ -7,7 +7,7 @@
   - include: tasks/prerequisites.yml
 
   roles:
-  - { role: zookeeper,          tags=source }
+  - zookeeper
 #  - { role: mesos,              tags=docker }
 
   post_tasks:

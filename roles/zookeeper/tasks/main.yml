@@ -3,13 +3,18 @@
 
 - name: Install Zookeeper package
   yum: state=present name={{ item }}
+  notify: Enable zookeeper service
   with_items:
   - zookeeper
   - zookeeper-server
 
 - name: Create configuration files
-  template: src={{ item }} dest=/etc/zookeeper/{{ item | replace(".j2", "") }}
-  			backup=yes
+  template: src={{ item }} dest=/etc/zookeeper/{{ item | replace(".j2", "") }} backup=yes
+  notify: Restart zookeeper service
   with_items:
   - zoo.cfg.j2
   - log4j.properties.j2
+  - myid.j2
+
+- name: Link to myid file
+  file: state=link src=/etc/zookeeper/myid dest=/var/lib/zookeeper/data/myid

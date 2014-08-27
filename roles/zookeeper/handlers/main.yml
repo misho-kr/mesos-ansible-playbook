@@ -1,0 +1,7 @@
+---
+
+- name: Enable zookeeper service
+  service: name=zookeeper state=stopped enabled=yes
+
+- name: Restart zookeeper service
+  service: name=zookeeper state=restarted
