@@ -5,3 +5,10 @@
 
 - name: Restart zookeeper service
   service: name=zookeeper state=restarted
+
+- name: Firewall zookeeper service
+  firewalld: zone=public port={{ item }}/tcp permanent=true state=enabled
+  with_items:
+  - "{{ zookeeper_client_port }}"
+  - "{{ zookeeper_followers_port }}"
+  - "{{ zookeeper_election_port }}"
