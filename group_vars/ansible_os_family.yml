@@ -1,0 +1,4 @@
+---
+# Global variables for RedHat OS hosts in Mesos cluster
+
+os_build_from_source:   [ 'Fedora' ]

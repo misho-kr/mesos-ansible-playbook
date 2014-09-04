@@ -2,13 +2,15 @@
 # Build Mesos cluster and frameworks
 
 - hosts: mesos
+  vars_files:
+    - "group_vars/{{ ansible_os_family }}.yml"
 
   pre_tasks:
   - include: tasks/prerequisites.yml
 
   roles:
-  - zookeeper
-#  - { role: mesos,              tags=docker }
+#  - zookeeper
+  - { role: mesos_from_source, when: ansible_distribution in os_build_from_source }
 
   post_tasks:
   - include: tasks/package.yml
