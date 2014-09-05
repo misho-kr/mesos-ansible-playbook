@@ -1,0 +1,4 @@
+---
+# Copy Mesos build artigfacts back to Ansible control host
+
+- debug: msg="Copy Mesos build artigfacts back to Ansible control host"

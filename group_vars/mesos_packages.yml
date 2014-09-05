@@ -1,0 +1,4 @@
+---
+# Global variables for RedHat OS hosts in Mesos cluster
+
+os_mesos_ready_packages:   [ 'RedHat' ]

@@ -1,16 +1,24 @@
 ---
 # Build Mesos cluster and frameworks
 
+- hosts: build
+  vars_files:
+    - "group_vars/mesos_packages.yml"
+
+  roles:
+  - { role: mesos_build_source, tags: build_src }
+
 - hosts: mesos
   vars_files:
-    - "group_vars/{{ ansible_os_family }}.yml"
+    - "group_vars/mesos_packages.yml"
 
   pre_tasks:
   - include: tasks/prerequisites.yml
 
   roles:
 #  - zookeeper
-  - { role: mesos_from_source, when: ansible_distribution in os_build_from_source }
+  - { role: mesos_from_source,   when: ansible_distribution not in os_mesos_ready_packages }
+  - { role: mesos_from_packages, when: ansible_distribution     in os_mesos_ready_packages }
 
   post_tasks:
   - include: tasks/package.yml

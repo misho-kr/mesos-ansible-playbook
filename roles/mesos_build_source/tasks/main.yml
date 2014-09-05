@@ -1,0 +1,28 @@
+---
+# Procedure to build Mesos from source
+
+- debug: msg="Procedure to build Mesos from source on = {{ ansible_distribution }}"
+
+- include: build_prerequisites.yml
+
+- debug: msg="*** BUILDING mesos {{ mesos_version }} from tag {{ mesos_git_tag }} ***"
+
+- name: Checkout mesos git repo
+  git: repo={{ mesos_git_repo_url }} dest={{ mesos_build_dir }}/mesos.git 
+       version="{{ git_tag }}"
+       update=no
+
+- name: Bootstrap mesos build
+  command: chdir={{ mesos_build_dir }}/mesos.git ./bootstrap
+
+- name: Create mesos build directory
+  file: path={{ mesos_build_dir }}/mesos.git/build state=directory mode=755
+
+- name: Build mesos from source
+  command: chdir={{ build_loc }}/mesos.git/build scl enable devtoolset-2 "{{ item }}"
+  with_items:
+    - ../configure
+    - make -j {{ mesos_build_parallel }}
+    - make check
+
+- include: build_artifacts.yml

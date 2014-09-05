@@ -1,4 +1,4 @@
 ---
-# Procedure to build Mesos from source
+# Procedure to install Mesos from just built packages
 
-- debug: msg="Procedure to build Mesos from source on = {{ ansible_distribution }}"
+- debug: msg="Procedure to install Mesos from just built packages on = {{ ansible_distribution }}"
