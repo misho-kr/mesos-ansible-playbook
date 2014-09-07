@@ -1,11 +1,9 @@
 ---
 # Procedure to build Mesos from source
 
-- debug: msg="Procedure to build Mesos from source on = {{ ansible_distribution }}"
+- debug: msg="*** BUILDING mesos version={{ mesos_version }}, tag={{ mesos_git_tag }} ***"
 
 - include: build_prerequisites.yml
-
-- debug: msg="*** BUILDING mesos {{ mesos_version }} from tag {{ mesos_git_tag }} ***"
 
 - name: Checkout mesos git repo
   git: repo={{ mesos_git_repo_url }} dest={{ mesos_build_dir }}/mesos.git 
@@ -15,6 +13,6 @@
   register: new_source_code
 
 - include: build_process.yml
-  when: mesos_build_force or new_source_code|changed
+  when: mesos_build_forced or (new_source_code|changed)
 
 - include: build_artifacts.yml

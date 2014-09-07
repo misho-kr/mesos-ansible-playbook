@@ -1,4 +1,13 @@
 ---
 # Copy Mesos build artigfacts back to Ansible control host
 
-- debug: msg="Copy Mesos build artigfacts back to Ansible control host"
+- debug: msg="Copy Mesos build artifacts back to Ansible control host"
+
+- name: Create Mesos build artifacts directory
+  file: name={{ mesos_artifacts_dir }}/mesos state=directory mode=0755
+  connection: local
+
+- name: Transfer Mesos build artifacts to control host
+  synchronize: src={{ mesos_build_dir }}/mesos.git/build
+               dest={{ mesos_artifacts_dir }}/mesos
+               mode=pull

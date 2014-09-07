@@ -1,5 +1,5 @@
 ---
-# Everything required before build can begin
+# Preparations and dependencies required before the build can begin
 
 - name: Create Mesos build directory
   file: name={{ mesos_build_dir }} state=directory mode=0755
