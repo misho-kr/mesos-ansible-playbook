@@ -1,14 +1,8 @@
 ---
 # Everything required before build can begin
 
-- name: Create Mesos build directorie
+- name: Create Mesos build directory
   file: name={{ mesos_build_dir }} state=directory mode=0755
-
-- name: Cleanup Mesos build directory
-  tags: mesos_build_cleanup
-  command: rm -rf {{ mesos_build_dir }}/*
-  args:
-    removes: "{{ mesos_build_dir }}/*"
 
 - name: Install dependant packages
   yum: name={{ item }} state=present

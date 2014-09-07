@@ -1,13 +1,15 @@
 ---
 # Build definitions
 
-mesos_build_dir:        /opt/mesos/build.dir
-mesos_build_deps:       [ 'autoconf', 'automake', 'libtool' ]
+mesos_build_dir:            /opt/mesos/build.dir
+mesos_build_deps:           [ 'autoconf', 'automake', 'libtool' ]
 
-mesos_git_repo_url:     https://git-wip-us.apache.org/repos/asf/mesos.git
+mesos_git_repo_url:         https://git-wip-us.apache.org/repos/asf/mesos.git
 
-mesos_version:          0.20.0
-mesos_git_tag:          0.20.0-rc2
-protobuf_version:       2.5.0
+mesos_version:              0.20.0
+mesos_git_tag:              0.20.0-rc2
+protobuf_version:           2.5.0
 
-mesos_build_parallel:   4
+mesos_build_force:          false
+mesos_build_parallel:       4
+mesos_build_test_parallel:  2

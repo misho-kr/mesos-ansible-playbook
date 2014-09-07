@@ -9,20 +9,12 @@
 
 - name: Checkout mesos git repo
   git: repo={{ mesos_git_repo_url }} dest={{ mesos_build_dir }}/mesos.git 
-       version="{{ git_tag }}"
-       update=no
+       version="{{ mesos_git_tag }}"
+       update=yes
+       force=yes
+  register: new_source_code
 
-- name: Bootstrap mesos build
-  command: chdir={{ mesos_build_dir }}/mesos.git ./bootstrap
-
-- name: Create mesos build directory
-  file: path={{ mesos_build_dir }}/mesos.git/build state=directory mode=755
-
-- name: Build mesos from source
-  command: chdir={{ build_loc }}/mesos.git/build scl enable devtoolset-2 "{{ item }}"
-  with_items:
-    - ../configure
-    - make -j {{ mesos_build_parallel }}
-    - make check
+- include: build_process.yml
+  when: mesos_build_force or new_source_code|changed
 
 - include: build_artifacts.yml
