@@ -11,3 +11,7 @@
   synchronize: src={{ mesos_build_dir }}/mesos.git/build
                dest={{ mesos_artifacts_dir }}/mesos
                mode=pull
+  tags:
+    - copy
+    - copy_mesos_artifacts
+    - copy_mesos_artifacts_from

@@ -1,4 +1,15 @@
 ---
 # Procedure to install Mesos from just built packages
 
-- debug: msg="Procedure to install Mesos from just built packages on = {{ ansible_distribution }}"
+- debug: msg="Procedure to install Mesos from compiled source code on = {{ ansible_distribution }}"
+
+- include: build_artifacts.yml
+
+- name: install pre-requisite software packages
+  sudo: yes
+  yum: name={{ item }} state=present
+  with_items: mesos_install_src_deps
+
+- name: install mesos from compiled source code
+  command: chdir={{ mesos_artifacts_dir }}/mesos make install
+

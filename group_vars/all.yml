@@ -8,11 +8,14 @@ protobuf_version:       2.5.0
 
 mesos_cluster: {
 
-    zookeeper:    'zk://cl04zk-229273.slc01.dev.ebayc3.com:2181,cl04zk-229274.slc01.dev.ebayc3.com:2181,cl04zk-229275.slc01.dev.ebayc3.com:2181/mesos',
+    zookeeper:    'zk://zk1:2181,zk2:2181,zk3:2181/mesos',
     logs:         /mesos/log,
     runs:         /mesos/run,
     disk_space:   16384
 }
 
-mesos_deps:      [ "git", "zip", "python-pip" ]
-mesos_pip_deps:  []
+mesos_deps:             [ "git", "zip", "python-pip" ]
+mesos_pip_deps:         []
+
+mesos_artifacts_dir:    /opt/mesos/artifacts.dir
+

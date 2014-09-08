@@ -8,7 +8,7 @@
   register: mesos_build_dir_created
 
 - name: Cleanup Mesos build directory
-  command: rm -rf {{ mesos_build_dir }}/mesos.git/build
+  command: rm -rf {{ mesos_build_dir }}/mesos.git/build/*
   when: not (mesos_build_dir_created|changed)
   tags: mesos_build_cleanup
 

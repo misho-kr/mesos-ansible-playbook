@@ -1,0 +1,15 @@
+---
+# Copy Mesos build artigfacts from Ansible control host
+
+- name: Create Mesos build artifacts directory
+  sudo: yes
+  file: name={{ mesos_artifacts_remote_dir }}/mesos
+        state=directory mode=0755 owner={{ ansible_user_id }}
+
+- name: Transfer Mesos build artifacts
+  synchronize: src={{ mesos_artifacts_dir }}/mesos
+               dest={{ mesos_artifacts_remote_dir }}/mesos
+  tags:
+    - copy
+    - copy_mesos_artifacts
+    - copy_mesos_artifacts_to

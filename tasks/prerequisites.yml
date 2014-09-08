@@ -1,7 +1,7 @@
 ---
 # Create directories, install required software packages, etc.
 
-- name: Create build directory
+- name: Create mesos directory
   file: state=directory path={{ mesos_dir }}
 
 - name: Install pre-requisite software packages
