@@ -2,7 +2,13 @@
 # Preparations and dependencies required before the build can begin
 
 - name: Create Mesos build directory
-  file: name={{ mesos_build_dir }} state=directory mode=0755
+  sudo: yes
+  file: name={{ mesos_build_dir }} state=directory
+        mode=0755 owner={{ ansible_user_id }}
+
+- name: Create link to Mesos build directory
+  file: state=link name={{ mesos_build_links }}/mesos.build
+        src={{ mesos_build_dir }}
 
 - name: Install dependant packages
   sudo: yes

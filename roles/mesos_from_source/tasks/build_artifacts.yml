@@ -13,3 +13,7 @@
     - copy
     - copy_mesos_artifacts
     - copy_mesos_artifacts_to
+
+- name: Create link to Mesos build directory
+  file: state=link name={{ mesos_build_links }}/mesos.build
+        src={{ mesos_artifacts_remote_dir }}/mesos

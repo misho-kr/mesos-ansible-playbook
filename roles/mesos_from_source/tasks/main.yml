@@ -11,5 +11,7 @@
   with_items: mesos_install_src_deps
 
 - name: install mesos from compiled source code
-  command: chdir={{ mesos_artifacts_dir }}/mesos make install
+  sudo: yes
+  command: chdir={{ mesos_build_links }}/mesos.build/mesos.git/build
+           make install
 

@@ -4,19 +4,20 @@
 - debug: msg="Compile Mesos source code on = {{ ansible_distribution }}"
 
 - name: Create mesos build directory
-  file: path={{ mesos_build_dir }}/mesos.git/build state=directory mode=755
+  file: path={{ mesos_build_links }}/mesos.build/mesos.git/build
+        state=directory mode=755
   register: mesos_build_dir_created
 
 - name: Cleanup Mesos build directory
-  command: rm -rf {{ mesos_build_dir }}/mesos.git/build/*
+  command: rm -rf {{ mesos_build_links }}/mesos.build/mesos.git/build/*
   when: not (mesos_build_dir_created|changed)
   tags: mesos_build_cleanup
 
 - name: Bootstrap mesos build
-  command: chdir={{ mesos_build_dir }}/mesos.git ./bootstrap
+  command: chdir={{ mesos_build_links }}/mesos.build/mesos.git ./bootstrap
 
 - name: Build mesos from source
-  command: chdir={{ mesos_build_dir }}/mesos.git/build {{ item }}
+  command: chdir={{ mesos_build_links }}/mesos.build/mesos.git/build {{ item }}
   with_items:
     - ../configure
     - make -j {{ mesos_build_parallel }}
@@ -25,7 +26,7 @@
     - mesos_build
 
 - name: Test mesos build from source
-  command: chdir={{ mesos_build_dir }}/mesos.git/build {{ item }}
+  command: chdir={{ mesos_build_links }}/mesos.build/mesos.git/build {{ item }}
   with_items:
     - make -j {{ mesos_build_test_parallel }} check
   tags:

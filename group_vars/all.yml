@@ -2,9 +2,16 @@
 # Global variables for Mesos cluster
 
 mesos_dir:              /mesos
+
 mesos_version:          0.20.0
 mesos_git_tag:          0.17.0-rc2
 protobuf_version:       2.5.0
+
+mesos_deps:             [ "git", "zip", "python-pip" ]
+mesos_pip_deps:         []
+
+mesos_artifacts_dir:    /opt/mesos/artifacts.dir
+mesos_build_links:      /tmp
 
 mesos_cluster: {
 
@@ -13,9 +20,3 @@ mesos_cluster: {
     runs:         /mesos/run,
     disk_space:   16384
 }
-
-mesos_deps:             [ "git", "zip", "python-pip" ]
-mesos_pip_deps:         []
-
-mesos_artifacts_dir:    /opt/mesos/artifacts.dir
-
