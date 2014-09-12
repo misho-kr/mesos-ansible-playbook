@@ -12,6 +12,6 @@
 
 - name: install mesos from compiled source code
   sudo: yes
-  command: chdir={{ mesos_build_links }}/mesos.build/mesos.git/build
+  command: chdir={{ mesos_build_links }}/mesos.build/build
            make install
 

@@ -6,8 +6,7 @@
 - include: build_prerequisites.yml
 
 - name: Checkout mesos git repo
-  git: repo={{ mesos_git_repo_url }}
-       dest={{ mesos_build_links }}/mesos.build/mesos.git 
+  git: repo={{ mesos_git_repo_url }} dest={{ mesos_build_dir }}/mesos.git 
        version="{{ mesos_git_tag }}"
        update=yes force=yes
   register: new_source_code

@@ -8,7 +8,8 @@
 
 - name: Create link to Mesos build directory
   file: state=link name={{ mesos_build_links }}/mesos.build
-        src={{ mesos_build_dir }}
+        src={{ mesos_build_dir }}/mesos.git
+        force=yes
 
 - name: Install dependant packages
   sudo: yes

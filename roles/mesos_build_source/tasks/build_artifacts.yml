@@ -8,7 +8,7 @@
   connection: local
 
 - name: Transfer Mesos build artifacts to control host
-  synchronize: src={{ mesos_build_links }}/mesos.build/mesos.git/build
+  synchronize: src={{ mesos_build_dir }}/mesos.git
                dest={{ mesos_artifacts_dir }}/mesos
                mode=pull
   tags:

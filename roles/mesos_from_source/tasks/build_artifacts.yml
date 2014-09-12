@@ -8,7 +8,7 @@
 
 - name: Transfer Mesos build artifacts
   synchronize: src={{ mesos_artifacts_dir }}/mesos
-               dest={{ mesos_artifacts_remote_dir }}/mesos
+               dest={{ mesos_artifacts_remote_dir }}
   tags:
     - copy
     - copy_mesos_artifacts
@@ -16,4 +16,4 @@
 
 - name: Create link to Mesos build directory
   file: state=link name={{ mesos_build_links }}/mesos.build
-        src={{ mesos_artifacts_remote_dir }}/mesos
+        src={{ mesos_artifacts_remote_dir }}/mesos/mesos.git
