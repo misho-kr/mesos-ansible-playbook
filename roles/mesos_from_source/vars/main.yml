@@ -2,4 +2,4 @@
 # Definitions for install from compiled source code
 
 mesos_artifacts_remote_dir:     "{{ mesos_dir }}/artifacts.dir"
-mesos_install_src_deps:         [ 'make' ]
+mesos_install_src_deps:         [ 'make', 'zlib-devel' ]

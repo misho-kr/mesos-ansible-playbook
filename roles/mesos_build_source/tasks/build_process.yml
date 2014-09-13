@@ -1,7 +1,7 @@
 ---
 # Procedure to compile Mesos source code
 
-- debug: msg="Compile Mesos source code on = {{ ansible_distribution }}"
+- debug: msg="Compiling Mesos source code on = {{ ansible_distribution }}"
 
 - name: Create mesos build directory
   file: path={{ mesos_build_links }}/mesos.build/build
@@ -19,7 +19,7 @@
 - name: Build mesos from source
   command: chdir={{ mesos_build_links }}/mesos.build/build {{ item }}
   with_items:
-    - ../configure
+    - ../configure --srcdir={{ mesos_build_links }}/mesos.build/
     - make -j {{ mesos_build_parallel }}
   tags:
     - build

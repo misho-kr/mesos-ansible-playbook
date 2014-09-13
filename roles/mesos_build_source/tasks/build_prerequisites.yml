@@ -3,13 +3,18 @@
 
 - name: Create Mesos build directory
   sudo: yes
-  file: name={{ mesos_build_dir }} state=directory
+  file: name={{ mesos_build_dir }}/mesos.git state=directory
         mode=0755 owner={{ ansible_user_id }}
 
-- name: Create link to Mesos build directory
-  file: state=link name={{ mesos_build_links }}/mesos.build
-        src={{ mesos_build_dir }}/mesos.git
-        force=yes
+- name: Create mount point for Mesos build directory
+  file: state=directory path={{ mesos_build_links }}/mesos.build
+        mode=0755 owner={{ ansible_user_id }}
+
+- name: Bind mount Mesos build directory
+  sudo: yes
+  mount: state=mounted opts=bind fstype=auto
+         name={{ mesos_build_links }}/mesos.build
+         src={{ mesos_build_dir }}/mesos.git
 
 - name: Install dependant packages
   sudo: yes

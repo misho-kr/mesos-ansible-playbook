@@ -14,6 +14,11 @@
     - copy_mesos_artifacts
     - copy_mesos_artifacts_to
 
-- name: Create link to Mesos build directory
-  file: state=link name={{ mesos_build_links }}/mesos.build
-        src={{ mesos_artifacts_remote_dir }}/mesos/mesos.git
+- name: Create mount point for Mesos build directory
+  file: state=directory path={{ mesos_build_links }}/mesos.build
+
+- name: Bind mount Mesos build directory
+  sudo: yes
+  mount: state=mounted opts=bind fstype=auto
+         name={{ mesos_build_links }}/mesos.build
+         src={{ mesos_artifacts_remote_dir }}/mesos/mesos.git

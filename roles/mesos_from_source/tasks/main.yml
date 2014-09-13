@@ -1,7 +1,7 @@
 ---
 # Procedure to install Mesos from just built packages
 
-- debug: msg="Procedure to install Mesos from compiled source code on = {{ ansible_distribution }}"
+- debug: msg="Installing Mesos from compiled source code on = {{ ansible_distribution }}"
 
 - include: build_artifacts.yml
 
@@ -15,3 +15,4 @@
   command: chdir={{ mesos_build_links }}/mesos.build/build
            make install
 
+- include: install_cleanup.yml

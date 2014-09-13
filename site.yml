@@ -6,7 +6,7 @@
     - "group_vars/mesos_packages.yml"
 
   roles:
-  - { role: mesos_build_source, tags: build_src }
+  - { role: mesos_build_source, tags: mesos_build_src }
 
 - hosts: mesos
   vars_files:
