@@ -14,8 +14,12 @@
     - copy_mesos_artifacts
     - copy_mesos_artifacts_to
 
-- name: Create mount point for Mesos build directory
-  file: state=directory path={{ mesos_build_links }}/mesos.build
+- name: Copy script to clear build dependencies files
+  copy: src=disable_mesos_build_dep.sh dest=./disable_mesos_build_dep.sh
+        mode=755
+
+- name: Clear build dependencies files (to disable build deps)
+  command: ./disable_mesos_build_dep.sh {{ mesos_artifacts_remote_dir }}
 
 - name: Bind mount Mesos build directory
   sudo: yes

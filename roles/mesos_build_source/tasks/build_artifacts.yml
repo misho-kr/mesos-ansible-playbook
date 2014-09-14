@@ -19,6 +19,7 @@
 - name: Unmount Mesos build directory
   sudo: yes
   mount: state=unmounted name={{ mesos_build_links }}/mesos.build
+         fstype=auto
 
 - name: Remove mount point of Mesos build directory
   file: state=absent path={{ mesos_build_links }}/mesos.build
