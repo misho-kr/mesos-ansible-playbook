@@ -1,24 +1,36 @@
 ---
 # Build Mesos cluster and frameworks
 
-- hosts: build
-  vars_files:
-    - "group_vars/mesos_packages.yml"
 
+# ---------------------------------------------------------------------
+#  Zookeeper cluster
+# ---------------------------------------------------------------------
+
+- hosts: zookeepers
   roles:
-  - { role: mesos_build_source, tags: mesos_build_src }
 
-- hosts: mesos
-  vars_files:
-    - "group_vars/mesos_packages.yml"
+    - { role: zookeeper, tags: server, sudo: yes }
 
-  pre_tasks:
-  - include: tasks/prerequisites.yml
+# TBC ------------------------------------------------------
 
-  roles:
-#  - zookeeper
-  - { role: mesos_from_source,   when: ansible_distribution not in os_mesos_ready_packages }
-  - { role: mesos_from_packages, when: ansible_distribution     in os_mesos_ready_packages }
+# - hosts: build
+#   vars_files:
+#     - "group_vars/mesos_packages.yml"
 
-  post_tasks:
-  - include: tasks/package.yml
+#   roles:
+#     - { role: mesos_build_source, tags: mesos_build_src }
+
+# - hosts: mesos
+#   vars_files:
+#     - "group_vars/mesos_packages.yml"
+
+#   pre_tasks:
+#   - include: tasks/prerequisites.yml
+
+#   roles:
+#     - { role: zookeeper, sudo: yes }
+#     - { role: mesos_from_source,   when: ansible_distribution not in os_mesos_ready_packages }
+#     - { role: mesos_from_packages, when: ansible_distribution     in os_mesos_ready_packages }
+
+#   post_tasks:
+#     - include: tasks/package.yml

@@ -1,22 +1,38 @@
 ---
 # Install and configure Zookeper 
 
-- name: Install Zookeeper package
+# ---------------------------------------------------------------------
+#  Installation 
+# ---------------------------------------------------------------------
+
+- include_vars: "{{ item }}"
+  with_first_found:
+   - "zookeeper-{{ ansible_distribution }}.yml"
+   - "zookeeper-{{ ansible_os_family }}.yml"
+
+- debug: msg="packages = {{ zookeeper_server_pkgs }}"
+
+- name: Install Zookeeper packages
   yum: state=present name={{ item }}
-  notify: Enable zookeeper service
-  with_items:
-  - zookeeper
-  - zookeeper-server
+  when: ansible_pkg_mgr == "yum"
+  with_items: zookeeper_server_pkgs
+
+- fail: msg="stop here"
+
+# ---------------------------------------------------------------------
+#  Configuration 
+# ---------------------------------------------------------------------
 
 - name: Create configuration files
   template: src={{ item }} dest=/etc/zookeeper/{{ item | replace(".j2", "") }} backup=yes
   notify:
-  - Restart zookeeper service
-  - Firewall zookeeper service
+    - Restart zookeeper service
+    - Firewall zookeeper service
+    - Enable zookeeper service
   with_items:
-  - zoo.cfg.j2
-  - log4j.properties.j2
-  - myid.j2
+    - zoo.cfg.j2
+    - log4j.properties.j2
+    - myid.j2
 
 - name: Link to myid file
   file: state=link src=/etc/zookeeper/myid dest=/var/lib/zookeeper/data/myid

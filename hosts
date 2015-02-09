@@ -2,6 +2,9 @@
 #                             Mesos cluster
 # -----------------------------------------------------------------------
 
+[build]
+hexagon.wonder.land	  ansible_connection=local
+
 [mesos:children]
 zookeepers
 mesos-masters
@@ -9,8 +12,12 @@ mesos-slaves
 mesos-frameworks
 
 [zookeepers]
+f21-mesos1.vmnet122.wonder.land
+f21-mesos2.vmnet122.wonder.land
 
 [mesos-masters]
+f21-mesos1.vmnet122.wonder.land
+f21-mesos2.vmnet122.wonder.land
 
 # slaves ---------------------------------------------------------------
 
@@ -20,10 +27,13 @@ marathon-slaves
 aurora-slaves
 
 [mesos-only-slaves]
+f21-mesos1.vmnet122.wonder.land
 
 [marathon-slaves]
+f21-mesos2.vmnet122.wonder.land
 
 [aurora-slaves]
+f21-mesos2.vmnet122.wonder.land
 
 # frameworks -----------------------------------------------------------
 

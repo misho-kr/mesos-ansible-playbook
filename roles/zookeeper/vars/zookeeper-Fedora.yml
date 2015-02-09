@@ -1,0 +1,6 @@
+---
+
+zookeeper_server_pkgs:
+  - zookeeper
+
+zookeeper_server_svc:     "zookeeper"
