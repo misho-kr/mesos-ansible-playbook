@@ -3,4 +3,7 @@
 zookeeper_server_pkgs:
   - zookeeper
 
+zookeeper_client_pkgs:
+  - zookeeper-java
+
 zookeeper_server_svc:     "zookeeper"

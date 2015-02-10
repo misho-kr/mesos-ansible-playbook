@@ -1,7 +1,8 @@
 ---
 
-zookeeper_dir:          "/var/lib/zookeeper"
+zookeeper_conf_dir:     "/etc/zookeeper"
 
+zookeeper_dir:          "/var/lib/zookeeper"
 zookeeper_data_dir:     "{{ zookeeper_dir }}/data"
 zookeeper_log_dir:      "{{ zookeeper_dir }}/log"
 

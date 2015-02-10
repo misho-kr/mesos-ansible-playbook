@@ -1,0 +1,13 @@
+---
+# Install and configure Zookeper client
+
+# ---------------------------------------------------------------------
+#  Installation 
+# ---------------------------------------------------------------------
+
+- debug: msg="packages = {{ zookeeper_client_pkgs }}"
+
+- name: Install Zookeeper packages
+  yum: state=present name={{ item }}
+  when: ansible_pkg_mgr == "yum"
+  with_items: zookeeper_client_pkgs

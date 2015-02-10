@@ -1,5 +1,5 @@
 {% for host in groups['zookeepers'] %}
   {%- if host == ansible_fqdn -%}
     {{ loop.index }}
-  {% endif %}
+  {%- endif %}
 {% endfor %}
