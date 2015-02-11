@@ -1,6 +1,22 @@
 ---
 # Build Mesos cluster and frameworks
 
+- hosts: mesos-cluster
+
+  pre_tasks:
+
+    - include_vars: "{{ item }}"
+      with_first_found:
+       - "group_vars/all-{{ ansible_distribution }}.yml"
+       - "group_vars/all-{{ ansible_os_family }}.yml"
+
+  tasks:
+
+    - name: Install nice-to-have packages
+      sudo: yes
+      yum: state=present name={{ item }}
+      when: ansible_pkg_mgr == "yum"
+      with_items: desired_packages_to_install
 
 # ---------------------------------------------------------------------
 #  Zookeeper cluster

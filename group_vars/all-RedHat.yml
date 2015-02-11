@@ -1,0 +1,5 @@
+---
+
+desired_packages_to_install:
+  - nc
+  - which

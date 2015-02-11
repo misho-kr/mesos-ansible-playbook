@@ -5,12 +5,17 @@
 #  Installation 
 # ---------------------------------------------------------------------
 
-- debug: msg="packages = {{ zookeeper_server_pkgs }}"
+# - debug: msg="packages = {{ zookeeper_server_pkgs }}"
 
 - name: Install Zookeeper packages
   yum: state=present name={{ item }}
   when: ansible_pkg_mgr == "yum"
   with_items: zookeeper_server_pkgs
+
+- name: Correct (add to) CLASSPATH env missing log4j jar
+  lineinfile: dest=/usr/libexec/zkEnv.sh state=present
+              insertafter="^CLASSPATH="
+              line='CLASSPATH="${CLASSPATH}:/usr/share/java/log4j-1.jar"'
 
 # ---------------------------------------------------------------------
 #  Configuration 
@@ -27,9 +32,8 @@
   notify:
     - Enable zookeeper service
     - Restart zookeeper service
-    - Firewall zookeeper service
+#    - Firewall zookeeper service
   with_items:
     - zoo.cfg.j2
     - log4j.properties.j2
     - myid.j2
-

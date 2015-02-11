@@ -1,5 +1,5 @@
 ---
-# Global variables for Mesos cluster
+# Global variables for the Mesos cluster
 
 mesos_dir:              /mesos
 

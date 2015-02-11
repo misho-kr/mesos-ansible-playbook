@@ -2,8 +2,10 @@
 
 zookeeper_server_pkgs:
   - zookeeper
+  - which
 
 zookeeper_client_pkgs:
   - zookeeper-java
+  - which
 
 zookeeper_server_svc:     "zookeeper"
