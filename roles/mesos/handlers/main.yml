@@ -1,0 +1,18 @@
+---
+
+# Mesos master -----------------------------
+
+- name: Enable Mesos master service
+  service: name={{ mesos_master_svc }} state=stopped enabled=yes
+
+- name: Restart Mesos master service
+  service: name={{ mesos_master_svc }} state=restarted
+
+# Mesos slave -----------------------------
+
+- name: Enable Mesos slave service
+  service: name={{ mesos_slave_svc }} state=stopped enabled=yes
+
+- name: Restart Mesos slave service
+  service: name={{ mesos_slave_svc }} state=restarted
+

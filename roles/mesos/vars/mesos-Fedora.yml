@@ -1,0 +1,10 @@
+---
+
+mesos_master_pkgs:
+  - mesos
+
+mesos_slave_pkgs:
+  - mesos
+
+mesos_master_svc:     "mesos-master"
+mesos_slave_svc:      "mesos-slave"

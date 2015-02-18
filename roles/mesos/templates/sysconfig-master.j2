@@ -1,0 +1,12 @@
+# This file contains environment variables that are passed to mesos-master.
+# To get a description of all options run mesos-master --help; any option
+# supported as a command-line option is also supported as an environment
+# variable.
+
+# Some options you're likely to want to set:
+MESOS_log_dir="{{ mesos_log_dir }}"
+MESOS_work_dir="{{ mesos_work_dir }}"
+MESOS_port="{{ mesos_master_port }}"
+
+# For isolated sandbox testing
+#MESOS_ip=127.0.0.1

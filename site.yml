@@ -27,6 +27,18 @@
 
     - { role: zookeeper, tags: server, sudo: yes }
 
+- hosts: mesos-masters
+  roles:
+
+    - { role: zookeeper, tags: client, sudo: yes }
+    - { role: mesos,     tags: master, sudo: yes }
+
+- hosts: mesos-slaves
+  roles:
+
+    - { role: zookeeper, tags: client, sudo: yes }
+    - { role: mesos,     tags: slave,  sudo: yes }
+
 # TBC ------------------------------------------------------
 
 # - hosts: build
@@ -46,7 +58,6 @@
 #   roles:
 #     - { role: zookeeper, sudo: yes }
 #     - { role: mesos_from_source,   when: ansible_distribution not in os_mesos_ready_packages }
-#     - { role: mesos_from_packages, when: ansible_distribution     in os_mesos_ready_packages }
 
 #   post_tasks:
 #     - include: tasks/package.yml

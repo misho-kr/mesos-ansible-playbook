@@ -1,4 +1,0 @@
----
-# Procedure to install Mesos from provided packages
-
-- debug: msg="Procedure to install Mesos from provided packages on = {{ ansible_distribution }}"

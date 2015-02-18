@@ -1,0 +1,17 @@
+---
+# Install and configure Mesos packages 
+
+# ---------------------------------------------------------------------
+
+- include_vars: "{{ item }}"
+  with_first_found:
+   - "mesos-{{ ansible_distribution }}.yml"
+   - "mesos-{{ ansible_os_family }}.yml"
+
+# ---------------------------------------------------------------------
+
+- include: master.yml
+  tags:: master
+
+- include: slave.yml
+  tags:: slave

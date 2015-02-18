@@ -1,0 +1,39 @@
+---
+# Install and configure Mesos master
+
+# ---------------------------------------------------------------------
+#  Installation 
+# ---------------------------------------------------------------------
+
+ - debug: msg="packages = {{ mesos_master_pkgs }}"
+
+- name: Install Mesos master packages
+  yum: state=present name={{ item }}
+  when: ansible_pkg_mgr == "yum"
+  with_items: mesos_master_pkgs
+  notify:
+    - Enable Mesos master service
+
+# ---------------------------------------------------------------------
+#  Configuration 
+# ---------------------------------------------------------------------
+
+# FIXME: this is very OS-specific, should be moved to separate task, one of each OS
+
+- name: Create sysconfig file
+  template: src="sysconfig-master.j2" dest="{{ mesos_conf_dir }}/mesos-master"
+
+- name: Create tmpfiles.d file
+  template: src="tmpfiles.j2" dest="/etc/tmpfiles.d/mesos.conf"
+
+
+- name: Create configuration files
+  template: src={{ item }} dest="{{ zookeeper_conf_dir}}/{{ item | replace('.j2', '') }}" backup=yes
+  notify:
+    - Enable zookeeper service
+    - Restart zookeeper service
+#    - Firewall zookeeper service
+  with_items:
+    - zoo.cfg.j2
+    - log4j.properties.j2
+    - myid.j2
