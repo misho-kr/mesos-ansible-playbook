@@ -1,13 +1,11 @@
 ---
 
-zookeeper_conf_dir:     "/etc/zookeeper"
+zookeeper_conf_dir:         "/etc/zookeeper"
 
-zookeeper_dir:          "/var/lib/zookeeper"
-zookeeper_data_dir:     "{{ zookeeper_dir }}/data"
-zookeeper_log_dir:      "{{ zookeeper_dir }}/log"
+zookeeper_dir:              "/var/lib/zookeeper"
+zookeeper_data_dir:         "{{ zookeeper_dir }}/data"
+zookeeper_log_dir:          "{{ zookeeper_dir }}/log"
 
-# the port at which the clients will connect
-zookeeper_client_port:          2181
-
-zookeeper_followers_port:       2888
-zookeeper_election_port:        3888
+# the ports for zk servers to communicate with each other
+zookeeper_followers_port:   2888
+zookeeper_election_port:    3888

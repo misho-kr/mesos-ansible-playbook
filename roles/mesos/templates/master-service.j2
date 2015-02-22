@@ -1,0 +1,37 @@
+[Unit]
+Description=Mesos Cluster Manager (Master)
+After=network.target
+Wants=network.target
+
+[Service]
+EnvironmentFile={{ mesos_conf_dir }}/mesos-master
+ExecStart=/usr/sbin/mesos-master $MESOS_MASTER_OPTS
+ExecStop=/usr/bin/killall -s 15 mesos-master
+ExecReload=/bin/kill -HUP $MAINPID
+User=root
+Group=mesos
+Restart=always
+RestartSec=20
+LimitNOFILE=16384
+
+#######################################
+# Note: Below are cgroup options
+#######################################
+#Slice=mesos
+#CPUAccounting=true
+#CPUShares=1024
+
+##################
+#MemoryAccounting=true
+#TBD: MemoryLimit=bytes, MemorySoftLimit=bytes
+##################
+#BlockIOAccounting=true
+#BlockIOWeight=??
+#BlockIODeviceWeight=??
+#TBD: BlockIOReadBandwidth=bytes, BlockIOWriteBandwidth=bytes
+
+#DeviceAllow=
+#DevicePolicy=auto|closed|strict
+
+[Install]
+WantedBy=multi-user.target

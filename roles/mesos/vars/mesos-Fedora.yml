@@ -8,3 +8,8 @@ mesos_slave_pkgs:
 
 mesos_master_svc:     "mesos-master"
 mesos_slave_svc:      "mesos-slave"
+
+master_config:
+  sysconfig-master.j2:    "{{ mesos_conf_dir }}/mesos-master"
+  tmpfiles.j2:            "/etc/tmpfiles.d/mesos.conf"
+  master-service.j2:      "/usr/lib/systemd/system/mesos-master.service"

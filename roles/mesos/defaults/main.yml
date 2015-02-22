@@ -3,7 +3,7 @@
 # mesos folders
 mesos_conf_dir:         "/etc/sysconfig"
 
-mesos_work_dir:         "/var/run/mesos/data"
+mesos_work_dir:         "/var/run/mesos"
 mesos_log_dir:          "/var/log/mesos"
 
 # the port at which master and slaves will listen

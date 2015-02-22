@@ -1,0 +1,23 @@
+# This file contains environment variables that are passed to mesos-slave.
+# To get a description of all options run mesos-slave --help; any option
+# supported as a command-line option is also supported as an environment
+# variable.
+
+MESOS_zk="zk://{% for zk_host in groups['zookeepers'] %}{{ zk_host }}:{{ zookeeper_client_port }},{% endfor %}""
+
+# The mesos master URL to contact. Should be host:port for
+# non-ZooKeeper based masters, otherwise a zk:// or file:// URL.
+MESOS_master=$HOSTNAME:5050
+
+# For isolated sandbox testing
+#MESOS_master=127.0.0.1:5050
+
+# For a complete listing of options execute 'mesos-slave --help'
+MESOS_log_dir="{{ mesos_log_dir }}"
+MESOS_work_dir="{{ mesos_work_dir }}"
+MESOS_containerizers=docker,mesos
+
+# systemd cgroup integration
+MESOS_isolation='cgroups/cpu,cgroups/mem'
+MESOS_cgroups_root='system.slice/mesos-slave.service'
+MESOS_cgroups_hierarchy=/sys/fs/cgroup

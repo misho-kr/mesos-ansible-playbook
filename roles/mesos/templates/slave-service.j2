@@ -1,0 +1,43 @@
+[Unit]
+Description=Mesos Cluster Manager (Slave)
+After=network.target
+Wants=network.target
+
+[Service]
+EnvironmentFile={{ mesos_conf_dir }}/mesos-slave
+ExecStart=/usr/sbin/mesos-slave $MESOS_SLAVE_OPTS
+ExecStop=/usr/bin/killall -s 15 mesos-slave
+ExecReload=/bin/kill -HUP $MAINPID
+#######################################
+# NOTE: running as user mesos fails priv switching
+#######################################
+User=root
+Group=mesos
+Restart=always
+RestartSec=20
+LimitNOFILE=16384
+
+#######################################
+# NOTE: Below are cgroup options
+#######################################
+Slice=mesos
+CPUAccounting=true
+#######################################
+# NOTE: Adjust as needed
+#######################################
+CPUShares=1024
+
+##################
+MemoryAccounting=true
+#TBD: MemoryLimit=bytes, MemorySoftLimit=bytes
+##################
+#BlockIOAccounting=true
+#BlockIOWeight=??
+#BlockIODeviceWeight=??
+#TBD: BlockIOReadBandwidth=bytes, BlockIOWriteBandwidth=bytes
+
+#DeviceAllow=
+#DevicePolicy=auto|closed|strict
+
+[Install]
+WantedBy=multi-user.target

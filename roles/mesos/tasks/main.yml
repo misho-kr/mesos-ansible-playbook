@@ -11,7 +11,7 @@
 # ---------------------------------------------------------------------
 
 - include: master.yml
-  tags:: master
+  when: only_master == "yes"
 
 - include: slave.yml
-  tags:: slave
+  when: only_slave == "yes"

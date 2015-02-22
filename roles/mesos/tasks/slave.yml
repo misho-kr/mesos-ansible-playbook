@@ -1,27 +1,19 @@
 ---
-# Install and configure Mesos master
+# Install and configure Mesos slave
 
 # ---------------------------------------------------------------------
 #  Installation 
 # ---------------------------------------------------------------------
 
-- debug: msg="packages = {{ mesos_master_pkgs }}"
+- debug: msg="packages = {{ mesos_slave_pkgs }}"
 
-- name: Install Mesos master packages
+- name: Install Mesos slave packages
   yum: state=present name={{ item }}
   when: ansible_pkg_mgr == "yum"
   with_items: mesos_master_pkgs
-  notify:
-    - Enable Mesos master service
+#  notify:
+#    - Enable Mesos slave service
 
 # ---------------------------------------------------------------------
 #  Configuration 
 # ---------------------------------------------------------------------
-
-# FIXME: this is very OS-specific, should be moved to separate task, one of each OS
-
-- name: Create mesos master configuration files
-  template: src="{{ item.key }}" dest="{{ item.value }}"
-  with_dict: master_config
-  notify:
-    - Restart Mesos master service

@@ -11,7 +11,7 @@
 # ---------------------------------------------------------------------
 
 - include: server.yml
-  tags:: server
+  when: only_server == "yes"
 
 - include: client.yml
-  tags:: client
+  when: only_client == "yes"

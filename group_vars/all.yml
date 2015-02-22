@@ -1,6 +1,19 @@
 ---
 # Global variables for the Mesos cluster
 
+# the port at which the clients will connect
+zookeeper_client_port:      2181
+
+# needed by the mesos roles
+only_master:        "no"
+only_slave:         "no"
+
+# needed by the zooker role
+only_server:        "no"
+only_client:        "no"
+
+# TBC --------------------------------------------------------
+
 mesos_dir:              /mesos
 
 mesos_version:          0.20.0
