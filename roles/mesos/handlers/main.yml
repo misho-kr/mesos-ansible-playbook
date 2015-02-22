@@ -16,3 +16,11 @@
 - name: Restart Mesos slave service
   service: name={{ mesos_slave_svc }} state=restarted
 
+# Docker ----------------------------------
+
+- name: Enable Docker daemon
+  service: name={{ docker_svc }} state=stopped enabled=yes
+
+- name: Restart Docker daemon
+  service: name={{ docker_svc }} state=restarted
+

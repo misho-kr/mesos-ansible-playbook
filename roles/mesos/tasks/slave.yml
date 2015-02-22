@@ -5,15 +5,32 @@
 #  Installation 
 # ---------------------------------------------------------------------
 
-- debug: msg="packages = {{ mesos_slave_pkgs }}"
+# - debug: msg="packages = {{ mesos_slave_pkgs }}"
 
 - name: Install Mesos slave packages
   yum: state=present name={{ item }}
   when: ansible_pkg_mgr == "yum"
-  with_items: mesos_master_pkgs
-#  notify:
-#    - Enable Mesos slave service
+  with_items: mesos_slave_pkgs
+  notify:
+    - Enable Mesos slave service
+    - Enable Docker daemon
+    - Restart Docker daemon
 
 # ---------------------------------------------------------------------
 #  Configuration 
 # ---------------------------------------------------------------------
+
+# FIXME: this is very OS-specific, should be moved to separate task, one of each OS
+
+- name: Create mesos slave configuration files
+  template: src="{{ item.key }}" dest="{{ item.value }}"
+  with_dict: slave_config
+  notify:
+    - Restart Mesos slave service
+
+# Docker service ------------------------------------------------------
+
+- debug: msg="Making sure Docker service is enabled and restarted"
+  notify:
+    - Enable Docker daemon
+    - Restart Docker daemon

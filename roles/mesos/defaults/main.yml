@@ -8,3 +8,5 @@ mesos_log_dir:          "/var/log/mesos"
 
 # the port at which master and slaves will listen
 mesos_master_port:      5050
+
+mesos_zookeeper_path:   mesos

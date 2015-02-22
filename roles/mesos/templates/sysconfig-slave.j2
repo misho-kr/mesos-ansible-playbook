@@ -3,11 +3,9 @@
 # supported as a command-line option is also supported as an environment
 # variable.
 
-MESOS_zk="zk://{% for zk_host in groups['zookeepers'] %}{{ zk_host }}:{{ zookeeper_client_port }},{% endfor %}""
-
 # The mesos master URL to contact. Should be host:port for
 # non-ZooKeeper based masters, otherwise a zk:// or file:// URL.
-MESOS_master=$HOSTNAME:5050
+MESOS_master="zk://{{ groups['zookeepers'] | join( ':' ~ zookeeper_client_port ~ ',') }}:{{ zookeeper_client_port }}/{{ mesos_zookeeper_path }}"
 
 # For isolated sandbox testing
 #MESOS_master=127.0.0.1:5050

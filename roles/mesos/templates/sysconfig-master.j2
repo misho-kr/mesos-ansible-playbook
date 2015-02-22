@@ -3,7 +3,8 @@
 # supported as a command-line option is also supported as an environment
 # variable.
 
-MESOS_zk="zk://{% for zk_host in groups['zookeepers'] %}{{ zk_host }}:{{ zookeeper_client_port }},{% endfor %}""
+MESOS_zk="zk://{{ groups['zookeepers'] | join( ':' ~ zookeeper_client_port ~ ',') }}:{{ zookeeper_client_port }}/{{ mesos_zookeeper_path }}"
+MESOS_quorum={{ ((groups['zookeepers'] | length) // 2) +1 }}
 
 # Some options you're likely to want to set:
 MESOS_log_dir="{{ mesos_log_dir }}"

@@ -5,11 +5,18 @@ mesos_master_pkgs:
 
 mesos_slave_pkgs:
   - mesos
+  - docker-io
 
 mesos_master_svc:     "mesos-master"
 mesos_slave_svc:      "mesos-slave"
+docker_svc:           "docker"
 
 master_config:
   sysconfig-master.j2:    "{{ mesos_conf_dir }}/mesos-master"
   tmpfiles.j2:            "/etc/tmpfiles.d/mesos.conf"
   master-service.j2:      "/usr/lib/systemd/system/mesos-master.service"
+
+slave_config:
+  sysconfig-slave.j2:    "{{ mesos_conf_dir }}/mesos-slave"
+  tmpfiles.j2:           "/etc/tmpfiles.d/mesos.conf"
+  slave-service.j2:      "/usr/lib/systemd/system/mesos-slave.service"
