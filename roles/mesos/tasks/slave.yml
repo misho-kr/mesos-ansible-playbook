@@ -13,8 +13,21 @@
   with_items: mesos_slave_pkgs
   notify:
     - Enable Mesos slave service
-    - Enable Docker daemon
-    - Restart Docker daemon
+#    - Enable Docker daemon
+#    - Restart Docker daemon
+
+- name: Cleanup old Mesos slave info
+  file: path="{{ mesos_work_dir }}/meta/slaves/latest" state=absent
+
+# Docker service ------------------------------------------------------
+
+- debug: msg="Making sure Docker service is enabled and restarted"
+
+- name: Enable Docker daemon
+  service: name={{ docker_svc }} state=stopped enabled=yes
+
+- name: Restart Docker daemon
+  service: name={{ docker_svc }} state=restarted
 
 # ---------------------------------------------------------------------
 #  Configuration 
@@ -27,10 +40,3 @@
   with_dict: slave_config
   notify:
     - Restart Mesos slave service
-
-# Docker service ------------------------------------------------------
-
-- debug: msg="Making sure Docker service is enabled and restarted"
-  notify:
-    - Enable Docker daemon
-    - Restart Docker daemon

@@ -13,9 +13,12 @@ MESOS_master="zk://{{ groups['zookeepers'] | join( ':' ~ zookeeper_client_port ~
 # For a complete listing of options execute 'mesos-slave --help'
 MESOS_log_dir="{{ mesos_log_dir }}"
 MESOS_work_dir="{{ mesos_work_dir }}"
-MESOS_containerizers=docker,mesos
+MESOS_containerizers={{ mesos_containerizers | join(',') }}
 
 # systemd cgroup integration
 MESOS_isolation='cgroups/cpu,cgroups/mem'
 MESOS_cgroups_root='system.slice/mesos-slave.service'
 MESOS_cgroups_hierarchy=/sys/fs/cgroup
+
+# slave resources
+MESOS_resources="cpus(*):{{ mesos_resources.cpus }};mem(*):{{ mesos_resources.memory }};disk(*):{{ mesos_resources.disk }};ports(*):[{{ mesos_resources.ports }}]"

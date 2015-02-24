@@ -13,6 +13,8 @@
   with_items: mesos_master_pkgs
   notify:
     - Enable Mesos master service
+    - Disable Docker daemon
+    - Stop Docker daemon
 
 # ---------------------------------------------------------------------
 #  Configuration 

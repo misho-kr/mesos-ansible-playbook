@@ -24,3 +24,8 @@
 - name: Restart Docker daemon
   service: name={{ docker_svc }} state=restarted
 
+- name: Disable Docker daemon
+  service: name={{ docker_svc }} state=stopped enabled=no
+
+- name: Stop Docker daemon
+  service: name={{ docker_svc }} state=stopped

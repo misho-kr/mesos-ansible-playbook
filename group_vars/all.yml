@@ -12,6 +12,18 @@ only_slave:         "no"
 only_server:        "no"
 only_client:        "no"
 
+# Mesos slave parameters -------------------------------------
+
+mesos_containerizers:
+  - docker
+  - mesos
+
+mesos_resources:
+  cpus:     3
+  memory:   1024
+  disk:     10140
+  ports:    "30000-40000"
+
 # TBC --------------------------------------------------------
 
 mesos_dir:              /mesos
